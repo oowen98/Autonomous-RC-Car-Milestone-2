@@ -14,7 +14,7 @@ import csv
 
 if __name__ == "__main__":
 
-    DataName = "Aug6_DataCollection"
+    DataName = "Aug6_DataCollection_2"
     os.mkdir(DataName)
     os.chdir(DataName)
 
