@@ -13,6 +13,8 @@ class Camera_Thread:
         self.frame = None
         self.stopped = False
         self.success = False
+        self.img = 0
+        self.count = 0
         print("Initializing Camera Thread")
         
     def start(self):
@@ -25,13 +27,17 @@ class Camera_Thread:
             #CameraLock.acquire()
             self.success, self.frame = self.cap.read()
             #CameraLock.release()
-            i += 1
-
+            #if (i == 8):
+               # self.count +=1
+               # i = 0
+            
             if self.stopped:
                 print("Camera Loops: ", i)
                 break
                 self.cap.release()
                 cv2.destroyAllWindows()
+
+            i+=1
 
     def read(self):
         return self.frame
