@@ -41,7 +41,7 @@ def IMU_data():
     #print([accel_data, gyro_data])
     return ([accel_data, gyro_data])
     
-
+'''
 def writeIMU_Data(elapsed_time):
     accel_data = IMU.get_accel_data() #Returns accel data in m/s^2
     gyro_data = IMU.get_gyro_data()
@@ -51,7 +51,7 @@ def writeIMU_Data(elapsed_time):
 
     c.writerow([elapsed_time,' ', 'Accelerometer Data m/s^2 (x,y,z)', *accel_data,' ', 'Gyro Data deg/s (x,y,z)', *gyro_data])
     f.close()
-
+'''
 
 def i2c_process(data_q, i2c_break_q):
     now = datetime.now()

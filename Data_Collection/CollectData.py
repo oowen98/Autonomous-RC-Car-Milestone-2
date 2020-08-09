@@ -14,7 +14,7 @@ import csv
 
 if __name__ == "__main__":
 
-    DataName = "Aug9_DataCollection"
+    DataName = "Aug9_DataCollection4"
     os.mkdir(DataName)
     os.chdir(DataName)
 
@@ -35,14 +35,14 @@ if __name__ == "__main__":
         frame = camera.read()
         cv2.imshow('frame', frame)
 
-        if (i == 30): #Capture 5 samples per second
+        if (i == 8): #Capture approx 10 samples per second
             j += 1
             ThrottlePWM, SteeringPWM = i2c.readSteeringThrottle()
             ThrottlePWM = Controls.map_value(ThrottlePWM, lower_in = 992, upper_in = 1996)
             SteeringPWM = Controls.map_value(SteeringPWM, lower_in = 940, upper_in = 1968)
             print(current_time, " ThrottlePWM: ", ThrottlePWM, "SteeringPWM: ", SteeringPWM)
             image_name = DataName + "_" + str(j) + ".jpg"
-            cv2.imwrite(imange_name, frame)
+            cv2.imwrite(image_name, frame)
 
             #Writing the data to the csv file
             with open(DataName+".csv", 'a', newline='') as f:
