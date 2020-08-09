@@ -14,7 +14,7 @@ import csv
 
 if __name__ == "__main__":
 
-    DataName = "Aug6_DataCollection_2"
+    DataName = "Aug9_DataCollection"
     os.mkdir(DataName)
     os.chdir(DataName)
 
@@ -26,7 +26,7 @@ if __name__ == "__main__":
     #Writing the Headers for the .csv file
     with open(DataName+".csv", 'a', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow(["time","Index", "Throttle_PWM" , "Steering_PWM"])
+        writer.writerow(["time","JPG Name","Index", "Throttle_PWM" , "Steering_PWM"])
 
     while True:
         now = datetime.now()
@@ -41,13 +41,13 @@ if __name__ == "__main__":
             ThrottlePWM = Controls.map_value(ThrottlePWM, lower_in = 992, upper_in = 1996)
             SteeringPWM = Controls.map_value(SteeringPWM, lower_in = 940, upper_in = 1968)
             print(current_time, " ThrottlePWM: ", ThrottlePWM, "SteeringPWM: ", SteeringPWM)
-            
-            cv2.imwrite(DataName+"_"+str(j)+".jpg", frame)
+            image_name = DataName + "_" + str(j) + ".jpg"
+            cv2.imwrite(imange_name, frame)
 
             #Writing the data to the csv file
             with open(DataName+".csv", 'a', newline='') as f:
                 writer = csv.writer(f)
-                writer.writerow([current_time, j, ThrottlePWM, SteeringPWM])
+                writer.writerow([current_time,image_name, j, ThrottlePWM, SteeringPWM])
 
             i = 0    
         
