@@ -12,7 +12,10 @@ from PIL import Image
 
 import sys
 
-sys.path.insert(1, 'C:/Users/Owen/Desktop/Projects/Autonomous RC Car/Autonomous-RC-Car-Milestone-2')
+#Choose depending if running on Windows or Jetson Nano
+#sys.path.insert(1, 'C:/Users/Owen/Desktop/Projects/Autonomous RC Car/Autonomous-RC-Car-Milestone-2')
+sys.path.insert(1, '/home/dlinano/Desktop/Autonomous-RC-Car-Milestone-2/')
+
 from PyTorch_NeuralNetwork import CNN1
 
 def frame_processing(frame):
@@ -57,7 +60,7 @@ if __name__ == "__main__":
     #device = torch.device('cuda')
     #model.to(device)
 
-    VideoPath = 'C:/Users/Owen/Desktop/Projects/Autonomous RC Car/Autonomous RC Car Milestone 1/Data Collection/SingleLane_July20.mp4'
+    VideoPath = 'SingleLane_July20.mp4'
 
     cap = cv2.VideoCapture(VideoPath)
     frame_cnt = 0
