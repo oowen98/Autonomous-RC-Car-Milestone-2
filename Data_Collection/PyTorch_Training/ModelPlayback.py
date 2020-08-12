@@ -16,7 +16,9 @@ import sys
 #sys.path.insert(1, 'C:/Users/Owen/Desktop/Projects/Autonomous RC Car/Autonomous-RC-Car-Milestone-2')
 sys.path.insert(1, '/home/dlinano/Desktop/Autonomous-RC-Car-Milestone-2/')
 
-from PyTorch_NeuralNetwork import CNN1
+sys.path.insert(1, 'C:/Users/Owen/Desktop/Projects/Autonomous RC Car/Autonomous-RC-Car-Milestone-2')
+
+import PyTorch_NeuralNetwork
 
 def frame_processing(frame):
     img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) #Converting from opencv image to PIL image
@@ -54,9 +56,9 @@ def displayThrottle_Steering(frame, throttle, steering):
 
 
 if __name__ == "__main__":
-    model = CNN1()
+    model = PyTorch_NeuralNetwork.Net2()
     model.eval()
-    model.load_state_dict(torch.load('Autonomous_RC_Car2.pt')) #Load Model
+    model.load_state_dict(torch.load('Autonomous_RC_Car_Net2_3.pt')) #Load Model
     #device = torch.device('cuda')
     #model.to(device)
 
@@ -82,11 +84,12 @@ if __name__ == "__main__":
             break
 
         img_tensor = frame_processing(frame)
+        #print("tensor shape: ", img_tensor.shape)
         output = model(img_tensor)
         
         steering = int(180*output[0,1])
         throttle = int(180*output[0,0])
-        
+        print("output: ", output)
         print("Throttle, Steering: ", throttle, " ", steering)
         displayThrottle_Steering(frame, throttle,steering)
             
