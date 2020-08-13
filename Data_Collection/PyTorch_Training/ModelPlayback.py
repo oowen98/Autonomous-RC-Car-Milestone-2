@@ -28,6 +28,8 @@ def frame_processing(frame):
     frame_color = color(frame_resize)
     img_tensor = to_tensor(frame_color)
     img_tensor = img_tensor.unsqueeze(0)
+
+    #img_tensor = img_tensor.to(torch.device('cuda'))
     return img_tensor
 
 def map_value(value, lower_in=0, upper_in=180, lower_out=-100, upper_out=100):
@@ -54,13 +56,13 @@ def displayThrottle_Steering(frame, throttle, steering):
 if __name__ == "__main__":
     model = PyTorch_NeuralNetwork.Net2()
     model.eval()
-    model.load_state_dict(torch.load('Autonomous_RC_Car_Net2_3.pt')) #Load Model
-    #device = torch.device('cuda')
-    #model.to(device)
+    model.load_state_dict(torch.load('Autonomous_RC_Car_Net2_5.pt')) #Load Model
+    device = torch.device('cuda')
+    model.to(device)
 
     VideoPath = 'C:/Users/Owen/Desktop/Projects/Autonomous RC Car/Autonomous RC Car Milestone 1/Data Collection/SingleLane_July20.mp4'
-
-    cap = cv2.VideoCapture(VideoPath)
+    VideoPath2 = 'C:/Users/Owen/Desktop/TrackDriving_Aug11.mp4'
+    cap = cv2.VideoCapture(VideoPath2)
     frame_cnt = 0
 
     while True:
@@ -80,6 +82,7 @@ if __name__ == "__main__":
             break
 
         img_tensor = frame_processing(frame)
+        img_tensor = img_tensor.to(device)
         #print("tensor shape: ", img_tensor.shape)
         output = model(img_tensor)
         
